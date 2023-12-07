@@ -25,11 +25,21 @@ wss://stt.ins8.ai/api/v1/stt/websocket/recognize?api_token={TOKEN}&timestamp=Tru
 ```python
 `api_token` - Your generated API Token.
 
-`language` - Refer to Language Model.
+`language` - Refer to Language Model. (en-sg, bh-sg, bh-id, ch-sg, ch-ml)
 
 `punctuation` - True/False
 
 `timestamp` - True/False
+
+`confidence` - True/False
+
+`enable_speaker_diarization` - True/False
+
+`diarization_speaker_count` - Int (Between 2 to 5)
+
+`pii` - True/False (Redacts Name, IC, Location, Email and Date)
+
+`itn` - True/False (Inverse normalizes text e.g. there are twenty eight birds -> there are 28 birds)
 ```
 
 </br>
@@ -57,6 +67,10 @@ After a connection is initialized, a client will have to first send a configurat
 `sample_rate_hertz` - Sample rate in kilohertz e.g. 16000.
 
 `stop_string` - The stop string that marks the end of an audio transmission.
+
+`custom_voab` - Enable greater emphasis on key words
+
+`boost` - Float value between -20.0 to 20.0
 ```
 
 </br>
@@ -66,7 +80,7 @@ After sending the initial start message, the client can begin transmitting audio
 ## Example of packet
 
 ```python
-{'encoding': 'raw', 'sample_rate_hertz': 16000, 'stop_string': 'EOS'}
+{'encoding': 'raw', 'sample_rate_hertz': 16000, 'stop_string': 'EOS', 'custom_vocab':'metaverse,bitcoin', 'boost':8}
 ```
 
 <br />
@@ -156,9 +170,9 @@ def get_chunks(filepath, filetype=None):
 
 async def wss_test(hostname="wss://stt.ins8.ai/api/v1/stt/websocket/recognize", token=''):
     audio_config, data_stream_list = get_chunks(filepath=path)
-    url = hostname + "?api_token=" + token
+    url = hostname + "?api_token=" + token + "&language=en-sg" + "&itn=True" + "&punctuation=True" + "&pii=True"
     ssl_context = None
-    ssl_context = ssl.SSLContext()
+    ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
     ssl_context.check_hostname = False
     ssl_context.verify_mode = ssl.CERT_NONE
     if ssl_context is not None:
