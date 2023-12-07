@@ -47,7 +47,8 @@ When making an API Request, you can enable or disable specific features by speci
 | Speaker Diarization                | ?enable_speaker_diarization=True?diarization_speaker_count=2           | False        |
 | Pii redaction             | ?pii=True                  | False        |
 | Inverse text normalization| ?itn=True                  | False        |
-| Custom Vocab | *Request Body*: custom_vocab='metaverse,bitcoin'; boost=8.0              | boost=8.0        |
+
+<br/>
 
 | **GPU Features**               | **HTTP Parameter Example** | **Default**  |
 |---------------------------|----------------------------|--------------|
@@ -72,11 +73,6 @@ Multiple features can be enabled or disabled at once by using & between differen
 </br>
 <div style={{ maxHeight:"50vh", width:"70vw"}}>
 
-Transcribing audio with punctuation and timestamp activated:
-
-```python
-https://stt.ins8.ai/api/v1/stt/recognize?api_token=<TOKEN>punctuation=True&timestamp=True&language=<MODEL-NAME>
-```
 
 Transcribing audio with punctuation, pii and itn activated:
 
