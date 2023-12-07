@@ -68,7 +68,7 @@ After a connection is initialized, a client will have to first send a configurat
 
 `stop_string` - The stop string that marks the end of an audio transmission.
 
-`custom_voab` - Enable greater emphasis on key words
+`custom_vocab` - Enable greater emphasis on key words
 
 `boost` - Float value between -20.0 to 20.0
 ```
